@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/assets/iziToast/dist/css/iziToast.css">
+    <link rel="stylesheet" type="text/css" href="/assets/iziToast/iziToast.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:ital@1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Passions+Conflict&family=Roboto:ital@1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Dancing+Script:wght@700&family=Passions+Conflict&family=Roboto:ital@1&display=swap');
+
+        body {
+            background-image: linear-gradient(to bottom right, rgba(243, 88, 88, 0.685), rgba(253, 72, 199, 0.884));
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 90vh;
+            z-index: 1;
+        }
+
+        .container::before {
+            position: absolute;
+            bottom: 30%;
+            left: 70%;
+            width: 600px;
+            height: 600px;
+            content: "";
+            background-image: linear-gradient(to top right, rgba(228, 128, 13, 0.459), rgba(129, 2, 247, 0.89));
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(15px);
+            animation: backgroud-slide 5s ease-in-out infinite alternate;
+        }
+
+        .container::after {
+            position: absolute;
+            top: 30%;
+            right: 60%;
+            width: 500px;
+            height: 500px;
+            content: "";
+            background-image: linear-gradient(to top right, rgba(240, 23, 106, 0.404), rgba(255, 0, 179, 0.61));
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(5px);
+            animation: backgroud-slide 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroud-slide {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(0, 150px);
+            }
+        }
+
+        .form {
+            background-color: rgba(26, 24, 24, 0.219);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 35px;
+            position: absolute;
+        }
+
+        .content {
+            width: 80%;
+            padding: 5% 10%;
+            height: 80%;
+            position: absolute;
+        }
+
+        h1 {
+            margin-top: -10px;
+            color: darkblue;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 2.5em;
+            font-family: 'Bungee Shade', cursive;
+
+        }
+
+        button {
+            width: 80%;
+            border: none;
+            height: 40px;
+            /* margin-top: 20px; */
+            padding: 5px 0;
+            position: absolute;
+            bottom: 0;
+            background-image: linear-gradient(to right, rgba(51, 51, 20, 0.459), rgba(15, 106, 209, 0.59));
+            border-radius: 15px;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            cursor: pointer;
+
+        }
+
+        .group {
+            height: 40px;
+            position: relative;
+            margin-bottom: 30px;
+
+        }
+
+        .group > i {
+            color: #541a8bc0;
+            padding: 15px 15px;
+            position: absolute;
+            margin-right: 15px;
+        }
+
+        .eye-icon {
+            margin-top: 15px;
+            color: #541a8bc0;
+            right: -35px;
+            top: -15px;
+            cursor: pointer;
+
+        }
+
+        .group a {
+            display: inline-block;
+            text-decoration: none;
+            color: #551A8B;
+            margin-left: 70px;
+        }
+
+        .group p {
+            display: inline-block;
+            color: #551A8B;
+        }
+
+        .group label {
+            position: absolute;
+            top: 15px;
+            left: 20%;
+            transition: 0.5s;
+
+        }
+
+        .group .inputText {
+            margin-top: 5px;
+            width: 80%;
+            padding: 0 10%;
+            height: 35px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            background-color: rgb(255, 255, 255, 0.6);
+            padding-left: 50px;
+        }
+
+        .group #roles {
+            margin-top: 5px;
+            width: 50%;
+            padding: 0 10%;
+            height: 35px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            background-color: rgb(255, 255, 255, 0.6);
+            margin-left: 30%;
+        }
+
+        .group select option {
+
+        }
+
+        .inputText:focus + label,
+        .inputText:not(:placeholder-shown) + label {
+            top: -20px;
+            left: 10%;
+        }
+
+        .inputText:valid {
+            border-bottom: 3px solid orange;
+        }
+
+        input[type='checkbox'] + label {
+            /* position: unset; */
+        }
+
+        .form-rotate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            z-index: -1;
+
+        }
+
+        #rotate {
+            background-image: linear-gradient(to right, #909FEE, #D292F3);
+            width: 500px;
+            height: 500px;
+            border-radius: 30% 70% 70% 30% / 30% 43% 57% 70%;
+            z-index: -1;
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translate(-50%);
+            transition: 1s;
+        }
+
+        .option {
+            position: absolute;
+            bottom: 10px;
+            width: 70%;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        .changeType {
+            width: 50%;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 1s;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .bg-active {
+            position: absolute;
+            width: 50%;
+            left: 0;
+            transition: 1s;
+            background-color: #909FEE;
+            height: 40px;
+            z-index: -1;
+            border-radius: 20px;
+        }
+
+        .changeType.active {
+            color: #fff;
+        }
+
+        .form.login .content:nth-child(1) {
+            z-index: 1;
+            animation: nextContent 1s ease-in-out 1 forwards;
+        }
+
+        .form.login .content:nth-child(2) {
+            z-index: 1;
+            animation: outContent 1s ease-in-out 1 forwards;
+        }
+
+        @keyframes nextContent {
+            from {
+                transform: translate(100%, 0px);
+            }
+            to {
+                transform: translate(0, 0px);
+            }
+        }
+
+        @keyframes outContent {
+            from {
+                transform: translate(0, 0px);
+            }
+            to {
+                transform: translate(-100%, 0px);
+            }
+        }
+
+        .form.register .content:nth-child(2) {
+            z-index: 1;
+            animation: nextContent 1s ease-in-out 1 forwards;
+        }
+
+        .form.register .content:nth-child(1) {
+            z-index: 1;
+            animation: outContent 1s ease-in-out 1 forwards;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="form login" id="form">
+        <div class="content">
+            <h1>Đăng nhập</h1>
+            <div class="group">
+                <i class="fa-solid fa-user"></i>
+                <input type="email" id="username-login" class="inputText" placeholder="&nbsp;" required>
+                <label for="username-login">Tài khoản</label>
+            </div>
+            <div class="group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="pass-login" class="inputText" placeholder="&nbsp;" required>
+                <label for="pass-login">Mật khẩu</label>
+                <i class="eye-icon fa-solid fa-eye" onclick="showPass()"></i>
+            </div>
+            <div class="group">
+                <input type="checkbox">
+                <p>Ghi nhớ đăng nhập</p>
+                <a href="#">Quên mật khẩu</a>
+            </div>
+            <button id="btnLogin">Đăng nhập</button>
+        </div>
+
+
+        <div class="content">
+            <h1>Đăng ký</h1>
+<!--            <div class="group" hidden>-->
+<!--                <select name="role" id="role">-->
+<!--                    <option value="2">User</option>-->
+<!--                </select>-->
+<!--            </div>-->
+            <div class="group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="fullName" class="inputText" placeholder="&nbsp;" required>
+                <label for="fullName">Họ và tên</label>
+            </div>
+            <div class="group">
+                <i class="fa-solid fa-user"></i>
+                <input type="email" id="username-reg" class="inputText" placeholder="&nbsp;" required>
+                <label for="username-reg">Tài khoản email</label>
+            </div>
+            <div class="group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="pass-reg" class="inputText" placeholder="&nbsp;" required>
+                <label for="pass-reg">Mật khẩu </label>
+                <i class="eye-icon fa-solid fa-eye" onclick="showPassReg1()"></i>
+
+            </div>
+            <button id="btnRegister">Đăng ký</button>
+        </div>
+
+
+        <div class="form-rotate">
+            <div id="rotate"></div>
+        </div>
+    </div>
+    <div class="option">
+        <div class="bg-active" id="bg-active"></div>
+        <div class="changeType active" id="login">Đăng nhập</div>
+        <div class="changeType" id="register">Đăng ký</div>
+    </div>
+</div>
+
+
+</body>
+<script src="/assets/jquery/jquery-3.6.1.min.js"></script>
+<script src="/assets/app.js"></script>
+<script src="/assets/sweetalert2/sweetalert2.min.js"></script>
+<script src="/assets/iziToast/iziToast.min.js"></script>
+
+
+<script>
+    let options = document.querySelectorAll('.changeType');
+    let form = document.getElementById('form');
+    let bgactive = document.getElementById('bg-active');
+    let rotatedeg = 0;
+
+    options.forEach(val => {
+        val.addEventListener('click', function (event) {
+            if (this.classList.contains('active')) {
+                return;
+            }
+            form.classList.remove('login');
+            form.classList.remove('register');
+            form.classList.add(this.id);
+            bgactive.style.left = this.offsetLeft + 'px';
+            options.forEach(item => {
+                item.classList.remove('active');
+            });
+            this.classList.add('active');
+
+            rotatedeg = rotatedeg + 200;
+            document.getElementById('rotate').style.transform = 'translate(-50%) rotate(' + rotatedeg + 'deg)';
+        })
+    });
+
+    function showPass() {
+        let x = document.getElementById("pass-login");
+        if (x.type == "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+        let y = document.querySelector(".fa-eye");
+        y.classList.toggle("fa-eye-slash")
+    };
+
+    function showPassReg1() {
+        let x = document.getElementById("pass-reg");
+        if (x.type == "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    };
+
+    let page = {
+        urls: {},
+        dialogs: {},
+        elements: {},
+        commands: {},
+        initializeEventControl: {}
+    }
+
+    page.elements.usernameLogin = $("#username-login");
+    page.elements.passLogin = $("#pass-login");
+    page.elements.btnLogin = $("#btnLogin");
+
+    page.elements.fullName = $("#fullName");
+    page.elements.usernameReg = $("#username-reg");
+    page.elements.passReg = $("#pass-reg");
+    page.elements.btnRegister = $("#btnRegister")
+
+    page.elements.login = $("#login");
+
+
+    page.elements.btnLogin.on("click", () => {
+        page.commands.login();
+    })
+
+
+    //  LOGIN  //
+    page.commands.login = () => {
+        let user = {
+            username: page.elements.usernameLogin.val(),
+            password: page.elements.passLogin.val()
+        }
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            url: "http://localhost:8080/api/auth/login",
+            data: JSON.stringify(user)
+        }).done((data) => {
+            App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 3000);
+            setTimeout(function () {
+                    window.location.href = "/";
+                }, 2000);
+        })
+            .fail((jqXHR) => {
+                App.SweetAlert.showErrorAlert("Tài khoản hoặc mật khẩu không đúng! Vui lòng kiểm tra lại!");
+
+            })
+    }
+    //   END LOGIN  //
+
+
+    // REGISTER //
+    page.elements.btnRegister.on("click", () => {
+        page.commands.register();
+    })
+
+    page.commands.register = () => {
+        let user = {
+            fullName: page.elements.fullName.val(),
+            username: page.elements.usernameReg.val(),
+            password: page.elements.passReg.val(),
+            role: {
+                id: "4",
+                code : "CUSTOMER"
+            }
+        }
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/api/auth/register",
+            data: JSON.stringify(user)
+        }).done((data) => {
+            $('#username-login').val($('#username-reg').val());
+            $('#pass-login').val($('#pass-reg').val());
+            App.IziToast.showSuccessAlertRight("Đăng ký tài khoản thành công", "<b></b>", 2000, "/");
+            page.elements.login.click();
+        }).fail((jqXHR) => {
+
+        });
+    }
+    //  END REGISTER  //
+
+
+    page.commands.loadData = () => {
+
+    }
+
+    page.initializeEventControl = () => {
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+        page.initializeEventControl();
+    });
+
+
+</script>
+</html>

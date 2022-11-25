@@ -1,0 +1,33 @@
+@-webkit-keyframes my {
+    0% { color: #ff001f; }
+    50% { color: #fff;  }
+    100% { color: #F8CD0A;  }
+}
+@-moz-keyframes my {
+    0% { color: rgba(255, 0, 0, 0.91);  }
+    50% { color: #0051ff;  }
+    100% { color: #36f80a;  }
+}
+@-o-keyframes my {
+    0% { color: #d80af8; }
+    50% { color: #ff4343; }
+    100% { color: #F8CD0A;  }
+}
+@keyframes my {
+    0% { color: #f82e0a;  }
+    15% { color: #36f80a;  }
+    30% { color: #F8CD0A;  }
+    45% { color: #d80af8; }
+    60% { color: #ff4343; }
+    75% { color: #0051ff;  }
+    100% { color: #ff4d00;  }
+}
+.test {
+
+    font-size:16px;
+    font-weight:bold;
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite;
+    -o-animation: my 700ms infinite;
+    animation: my 700ms infinite;
+}

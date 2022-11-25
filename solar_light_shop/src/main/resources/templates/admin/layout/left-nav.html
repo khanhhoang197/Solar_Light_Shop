@@ -1,0 +1,117 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<th:block th:fragment="left-nav">
+    <div class="left-side-menu">
+
+
+
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul class="metismenu" id="side-menu">
+
+                <li class="menu-title">Tất cả danh mục</li>
+
+                <li>
+                    <a href="/admins">
+                        <i class="ti-home"></i>
+                        <span> Trang chủ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="ti-menu-alt"></i>
+                        <span>  Quản lý sản phẩm </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+
+                        <li><a href="/products">Danh sách sản phẩm</a></li>
+                        <li><a href="#">Thêm sản phẩm mới</a></li>
+                        <li><a href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="fa-solid fa-users"></i>
+                        <span>  Quản lý nhân viên </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li><a href="/users">Danh sách nhân viên</a></li>
+                        <li><a href="#">Thêm nhân viên mới</a></li>
+                        <li><a href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="fa-solid fa-person-shelter"></i>
+                        <span>  Quản lý khách hàng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li><a href="/customers">Danh sách khách hàng</a></li>
+                        <li><button id="btnShowCreateModalCustomer" >Thêm khách hàng mới</button>></li>
+                        <li><a href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="ti-files"></i>
+                        <span> Pages </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li><a href="pages-login.html">Login</a></li>
+                        <li><a href="pages-register.html">Register</a></li>
+                        <li><a href="pages-forget-password.html">Forget Password</a></li>
+                        <li><a href="pages-lock-screen.html">Lock-screen</a></li>
+                        <li><a href="pages-blank.html">Blank page</a></li>
+                        <li><a href="pages-404.html">Error 404</a></li>
+                        <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
+                        <li><a href="pages-session-expired.html">Session Expired</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="ti-share"></i>
+                        <span>  Multi Level  </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level nav" aria-expanded="false">
+                        <li>
+                            <a href="javascript: void(0);">Level 1.1</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" aria-expanded="false">Level 1.2
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-third-level nav" aria-expanded="false">
+                                <li>
+                                    <a href="javascript: void(0);">Level 2.1</a>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);">Level 2.2</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+
+    </div>
+</th:block>

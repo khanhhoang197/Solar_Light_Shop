@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <title>Quản lý sản phẩm</title>
+  <link href="/assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+  <link href="/assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css">
+  <link href="/assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css">
+  <link href="/assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/assets/css/flicker.css">
+  <th:block th:replace="/admin/layout/head :: head"/>
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+  <!-- Topbar Start -->
+  <th:block th:replace="/admin/layout/top-nav :: top-nav"/>
+  <!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
+  <th:block th:replace="/admin/layout/left-nav :: left-nav"/>
+  <!-- Left Sidebar End -->
+
+  <!-- ============================================================== -->
+  <!-- Start Page Content here -->
+  <!-- ============================================================== -->
+
+  <div class="content-page">
+    <div class="content">
+
+      <!-- Start container-fluid -->
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <h4 class="header-title mb-3">Xin chào <span th:text="${user.fullName}" class="test"></span>! Chúc <span th:text="${user.fullName}" class="test"></span> một ngày làm việc hiệu quả !</h4>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+        <div class="row">
+          <div class="col-12">
+            <div>
+              <h3 class="font-24">Danh sách sản phẩm </h3>
+
+              <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th >Ảnh</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Giá</th>
+                  <th >Công cụ</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                  <td >1</td>
+
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+                  <td>61</td>
+                  <td>2011/04/25</td>
+                  <td>$320,800</td>
+                </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+        <!--end row -->
+
+
+        <!-- end row -->
+
+
+        <!-- end row -->
+
+      </div>
+      <!-- end container-fluid -->
+
+
+      <!-- Footer Start -->
+      <th:block th:replace="/admin/layout/footer :: footer"/>
+      <!-- end Footer -->
+    </div>
+    <!-- end content -->
+
+  </div>
+  <!-- END content-page -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- Vendor js -->
+<th:block th:replace="/admin/layout/script-tables :: script-table"/>
+
+</body>
+
+</html>

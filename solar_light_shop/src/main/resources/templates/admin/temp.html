@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <link rel="stylesheet" href="/assets/css/flicker.css">
+  <title>Trang quản lý admin</title>
+  <th:block th:replace="/admin/layout/head :: head"/>
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+  <!-- Topbar Start -->
+  <th:block th:replace="/admin/layout/top-nav :: top-nav"/>
+  <!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
+  <th:block th:replace="/admin/layout/left-nav :: left-nav"/>
+  <!-- Left Sidebar End -->
+
+  <!-- ============================================================== -->
+  <!-- Start Page Content here -->
+  <!-- ============================================================== -->
+
+  <div class="content-page">
+    <div class="content">
+
+      <!-- Start container-fluid -->
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <span class="header-title mb-3">Xin chào <span th:text="${user.getRole().getPosition()}" style="color: #7c40c6; font-weight: bold"></span>: <span class="test" th:text="${user.fullName}" ></span>!</br>
+                Chúc <span th:text="${user.getRole().getPosition()}" style="font-weight: bold" ></span> một ngày làm việc hiệu quả !</span>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+
+
+        <!--end row -->
+
+
+        <!-- end row -->
+
+
+        <!-- end row -->
+
+      </div>
+      <!-- end container-fluid -->
+
+
+      <!-- Footer Start -->
+      <th:block th:replace="/admin/layout/footer :: footer"/>
+      <!-- end Footer -->
+    </div>
+    <!-- end content -->
+
+  </div>
+  <!-- END content-page -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- Vendor js -->
+<th:block th:replace="/admin/layout/script :: script"/>
+
+</body>
+
+</html>
