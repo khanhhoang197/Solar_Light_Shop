@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Khách hàng bị xóa</title>
+    <th:block th:replace="/admin/layout/head :: headCustomer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+         <!--  <th:block th:replace="/admin/layout/head :: head"/>-->
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/admin/layout/top-nav :: top-nav"/>
+    <!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
+    <th:block th:replace="/admin/layout/left-nav :: left-nav"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h4 class="header-title mb-3">Xin chào <span th:text="${user.fullName}" class="test"></span>!
+                                Chúc <span th:text="${user.fullName}" class="test"></span> một ngày làm việc hiệu quả !
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h3 class="font-24">Danh sách khách hàng đã xóa </h3>
+
+                            <table id="datatable" class="table table-bordered dt-responsive nowrap tbCustomer"
+                                   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Ảnh</th>
+                                    <th>Họ và tên</th>
+                                    <th>Email</th>
+                                    <th>Số ĐT</th>
+                                    <th>Tỉnh/TP</th>
+                                    <th>Quận/Huyện</th>
+                                    <th>Phường/Xã</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Người xóa</th>
+                                    <th>Công cụ</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--end row -->
+
+                <!-- end row -->
+
+
+                <!-- end row -->
+
+            </div>
+            <!-- end container-fluid -->
+
+
+            <!-- Footer Start -->
+            <th:block th:replace="/admin/layout/footer :: footer"/>
+            <!-- end Footer -->
+        </div>
+        <!-- end content -->
+
+    </div>
+    <!-- END content-page -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- Vendor js -->
+<th:block th:replace="/admin/layout/script-tables :: script-table"/>
+<th:block th:replace="/admin/layout/script :: scriptCustomer"/>
+
+</body>
+
+<script>
+    let page = {
+        urls: {
+            getAllCustomers: App.CUSTOMER_API,
+            getAllDeletedCustomer: App.CUSTOMER_API + "?deleted=0&id_ne=",
+            getCustomerById: App.CUSTOMER_API,
+            createCustomer: App.CUSTOMER_API,
+            updateCustomer: App.CUSTOMER_API,
+            deleteCustomer: App.CUSTOMER_API + "/delete",
+            getAllProvinces: App.PROVINCE_URL,
+            getAllDistrictsByProvinceId: App.PROVINCE_URL + "district/",
+            getAllWardsByDistrictId: App.PROVINCE_URL + "ward/",
+            error_403: App.ERROR_URL + "403",
+            getCustomerAvatarById: App.CUSTOMER_AVATAR_URL
+        },
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+            alertDanger: {},
+        },
+        elements: {},
+        commands: {},
+        alertDanger: {},
+        initializeEventControl: {}
+    }
+
+    page.elements.btnShowCreateModal = $("#btnShowCreateModal");
+    page.elements.tbCustomer = $(".tbCustomer");
+    page.elements.tbCustomerBody = $(".tbCustomer tbody");
+
+    let customer = new Customer();
+    let locationRegion = new LocationRegion();
+    let customerAvatar = new CustomerAvatar();
+    // let user = new User();
+
+    page.commands.enableTooltip = () => {
+        let icons = document.querySelectorAll('[data-toggle="tooltip"]');
+        icons.forEach((icon) => {
+            new bootstrap.Tooltip(icon);
+        })
+    }
+
+    page.commands.getAllDeletedCustomer = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllDeletedCustomer,
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    customerAvatar = item;
+                    customer = customerAvatar.customer;
+                    locationRegion = customer.locationRegion;
+                    page.elements.tbCustomerBody.prepend(page.commands.renderCustomer(customerAvatar, customer, locationRegion));
+                });
+
+                page.commands.enableTooltip();
+
+                page.commands.removeHandleShowModal();
+
+                page.commands.handleShowGroupModal();
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    page.commands.renderCustomer = (obj, customer, locationRegion) => {
+        let image_thumbnail = App.BASE_URL_CLOUD_IMAGE + "/" + App.SCALE_IMAGE_W100_H80_Q100 + "/" + obj.fileFolder + "/" + obj.fileName;
+        return `
+                <tr id="tr_${customer.id}">
+                    <td>${customer.id}</td>
+                    <td>
+                        <img src=${image_thumbnail} alt="${obj.id}">
+                    </td>
+                    <td>${customer.fullName}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.phone}</td>
+                    <td>${locationRegion.provinceName}</td>
+                    <td>${locationRegion.districtName}</td>
+                    <td>${locationRegion.wardName}</td>
+                    <td>${locationRegion.address}</td>
+                    <td></td>
+                    <td class="text-center">
+                        <button data-id="${customer.id}"
+                                data-avatar-id = "${obj.id}"
+                                data-avatar-file-folder = "${obj.fileFolder}"
+                                data-avatar-file-name = "${obj.fileName}"
+                                class="btn btn btn-outline-info restore"
+                                title="Khôi phục"
+                                data-toggle="tooltip"
+                                data-bs-original-title="Edit"
+                                data-bs-placement="top"
+                                data-bs-toggle="modal"
+                             <i class="fa-regular fa-reply"></i>
+          </button>
+                    </td>
+
+                </tr>
+            `;
+    }
+
+    //--- DELETE CUSTOMER ---//
+    page.commands.handleShowConfirmRestore = () => {
+        $(".restore").on("click", function () {
+            let id = $(this).data("id");
+            page.commands.getCustomerById(id).then(() => {
+                Swal.fire({
+                    title: 'Khôi phục',
+                    text: "Bạn có muốn khôi phục khách hàng:' " + customer.fullName + " ' không?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Khôi phục'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        page.commands.doDeleteCustomer(id)
+                    }
+                })
+            })
+        });
+    }
+
+    page.commands.doRestoreCustomer = (customerId) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PATCH",
+            url: page.urls.deleteCustomer + "/" + customerId,
+            data: JSON.stringify(customer)
+        })
+            .done(() => {
+                $("#tr_" + customerId).remove();
+                App.IziToast.showSuccessAlertLeft("Xóa khách hàng <b>'" + customer.fullName + "'</b> thành công");
+            })
+            .fail((jqXHR) => {
+                console.log("jq: ", jqXHR)
+                if (jqXHR.status === 401) {
+                    App.SweetAlert.showError401();
+                } else {
+                    if (jqXHR.status === 403) {
+                        App.SweetAlert.showError403();
+                    } else {
+                        App.SweetAlert.showErrorAlert(jqXHR.responseJSON.message);
+                        // App.SweetAlert.showErrorAlert(jqXHR.responseJSON);
+                    }
+                }
+            })
+    }
+    //--- END DELETE ---//
+
+    page.commands.getCustomerById = (customerId) => {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getCustomerById + "/" + customerId
+        }).done((data) => {
+            customer = data;
+        })
+            .fail((jqXHR) => {
+                let errors = jqXHR.responseJSON;
+                let strError = "";
+                if (errors) {
+                    $.each(errors, (k, v) => {
+                        strError += `${v}`;
+                    })
+                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: strError,
+                })
+            })
+    }
+    //--- SHOW GROUP MODAL ---//
+    page.commands.handleShowGroupModal = () => {
+        page.commands.handleShowConfirmRestore();
+
+    }
+    //--- END SHOW GROUP MODAL ---//
+
+    //--- REMOVE SHOW MODAL ---//
+    page.commands.removeHandleShowModal = () => {
+        page.elements.btnShowCreateModal.off("click");
+        $(".restore").off("click");
+    }
+    //--- END REMOVE SHOW MODAL ---//
+
+
+    page.commands.loadData = () => {
+        page.commands.getAllDeletedCustomer();
+
+    }
+
+    page.initializeEventControl = () => {
+        page.commands.handleShowGroupModal();
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+        page.initializeEventControl();
+    });
+</script>
+</html>

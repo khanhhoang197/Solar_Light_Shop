@@ -418,7 +418,10 @@
     };
 
     let page = {
-        urls: {},
+        urls: {
+            registers: App.REGISTER,
+            login: App.LOGIN
+        },
         dialogs: {},
         elements: {},
         commands: {},
@@ -454,10 +457,10 @@
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://localhost:8080/api/auth/login",
+            url: page.urls.login,
             data: JSON.stringify(user)
         }).done((data) => {
-            App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 3000);
+            App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 2000);
             setTimeout(function () {
                     window.location.href = "/";
                 }, 2000);
@@ -491,7 +494,7 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/api/auth/register",
+            url: page.urls.registers,
             data: JSON.stringify(user)
         }).done((data) => {
             $('#username-login').val($('#username-reg').val());

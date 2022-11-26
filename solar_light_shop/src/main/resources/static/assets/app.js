@@ -2,6 +2,19 @@ class App{
     static DOMAIN_SERVER = "http://localhost:8080";
     static AUTH_URL = this.DOMAIN_SERVER + "/api/auth";
     static ADMIN_API = this.DOMAIN_SERVER + "/api/admins";
+    static PROVINCE_URL = "https://vapi.vnappmob.com/api/province/";
+    static CUSTOMER_API = this.DOMAIN_SERVER + "/api/customers";
+    static PRODUCT_API = this.DOMAIN_SERVER + "/api/products";
+    static USER_API = this.DOMAIN_SERVER + "/api/users";
+    static ERROR_URL = this.DOMAIN_SERVER + "/error/";
+    static CUSTOMER_AVATAR_URL = this.DOMAIN_SERVER + "/api/customer-avatars";
+    static REGISTER = this.DOMAIN_SERVER + "/api/auth/register";
+    static LOGIN = this.DOMAIN_SERVER + "/api/auth/login";
+
+
+    static BASE_URL_CLOUD_IMAGE = "https://res.cloudinary.com/dv51vpfep/image/upload";
+    static SCALE_IMAGE_W100_H80_Q100 = "c_limit,w_100,h_80,q_100";
+    static SCALE_IMAGE_W600_H650_Q100 = "c_limit,w_600,h_650,q_100";
 
 
 
@@ -138,4 +151,52 @@ class App{
         }
     }
 }
+class User{
+    constructor(id, createAt, createBy, deleted, updateAt, updateBy, fullName, passWord, userName, roleId ) {
+        this.id = id;
+        this.crateAt = createAt;
+        this.createBy = createBy;
+        this.deleted = deleted;
+        this.updateAt = updateAt;
+        this.updateBy = updateBy;
+        this.fullName = fullName;
+        this.passWord = passWord;
+        this.userName = userName;
+        this.roleId = roleId;
+    }
+}
+class LocationRegion {
+    constructor(id, provinceId, provinceName, districtId, districtName, wardId, wardName, address) {
+        this.id = id;
+        this.provinceId = provinceId;
+        this.provinceName = provinceName;
+        this.districtId = districtId;
+        this.districtName = districtName;
+        this.wardId = wardId;
+        this.wardName = wardName;
+        this.address = address;
+    }
 
+}
+class Customer {
+    constructor(id, fullName, email, phone, locationRegion) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.locationRegion = locationRegion;
+    }
+}
+
+class CustomerAvatar{
+    constructor(id, fileName, fileFolder, fileUrl, fileType, cloudId, ts, customer) {
+        this.id = id;
+        this.fileName = fileName;
+        this.fileFolder = fileFolder;
+        this.fileUrl = fileUrl;
+        this.fileType = fileType;
+        this.cloudId = cloudId;
+        this.ts = ts;
+        this.customer = customer;
+    }
+}

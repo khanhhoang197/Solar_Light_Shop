@@ -20,10 +20,19 @@ public class CustomersController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/admin/customer/list");
 
-//        List<CustomerDTO> customers = customerService.getAllCustomerDTO();
+        modelAndView.addObject("user", appUtils.getPrincipalUser());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/deleted-customer")
+    public ModelAndView showListDeleteCustomerPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/admin/customer/deletedCustomer");
 
         modelAndView.addObject("user", appUtils.getPrincipalUser());
 
         return modelAndView;
     }
+
 }

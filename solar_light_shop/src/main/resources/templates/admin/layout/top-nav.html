@@ -170,6 +170,13 @@
                     </div>
                 </form>
             </li>
+            <li class="col-md-7">
+                <marquee direction="left">
+                    <h4>Xin chào <span th:text="${user.getRole().getPosition()}" style="font-weight: bold" ></span> <span th:text="${user.fullName}" class="test"></span>!
+                        Chúc <span th:text="${user.getRole().getPosition()}" style="font-weight: bold" ></span> một ngày vui!
+                    </h4>
+                </marquee>
+            </li>
         </ul>
     </div>
 </th:block>

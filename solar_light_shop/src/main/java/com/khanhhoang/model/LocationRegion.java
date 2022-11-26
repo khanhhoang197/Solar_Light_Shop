@@ -1,5 +1,6 @@
 package com.khanhhoang.model;
 
+import com.khanhhoang.model.dto.LocationRegionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
