@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP Status 403</title>
+  <style>
+    body {
+      font-size: 1.4rem;
+      background: rgb(44, 42, 42);
+      color: rgb(255, 0, 0);
+
+    }
+    p {
+      line-height: 1.5;
+      margin: 0 0 1.25em 0;
+    }
+    #site-content {
+      display: block;
+      padding: 1rem 4rem 0 4rem;
+     
+    }
+    .sans-excerpt {
+      word-wrap: break-word;
+    }
+    .go-home {
+      color: #ececec;
+      font-size: .95em;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .go-home:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      text-align: center;
+      font-size: 7em;
+    }
+    h2{
+      text-align: center;
+      color: rgb(255, 238, 0);
+    }
+  </style>
+</head>
+<body>
+<div id="site-content">   
+   <a style="float:left ;" class="go-home" href="javascript:void(0)" onclick="window.history.go(-1); return false;" >← Quay lại</a>
+   <a style="float: right;" class="go-home" href="/home">Tới trang chủ →</a>
+
+   <h1>403</h1>
+  <h2><p>
+    Xin chào <b style="color: rgb(255, 238, 0);" th:text="${username}"></b>. Bạn không có quyền truy cập
+  </p></h2>
+ 
+  
+  
+</div>
+
+</body>
+</html>

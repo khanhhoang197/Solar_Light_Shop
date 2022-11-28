@@ -8,13 +8,15 @@ class App{
     static USER_API = this.DOMAIN_SERVER + "/api/users";
     static ERROR_URL = this.DOMAIN_SERVER + "/error/";
     static CUSTOMER_AVATAR_URL = this.DOMAIN_SERVER + "/api/customer-avatars";
-    static REGISTER = this.DOMAIN_SERVER + "/api/auth/register";
-    static LOGIN = this.DOMAIN_SERVER + "/api/auth/login";
+    static REGISTER_USER = this.DOMAIN_SERVER + "/api/auth/register";
+    static LOGIN_USER = this.DOMAIN_SERVER + "/api/auth/login";
 
 
     static BASE_URL_CLOUD_IMAGE = "https://res.cloudinary.com/dv51vpfep/image/upload";
     static SCALE_IMAGE_W100_H80_Q100 = "c_limit,w_100,h_80,q_100";
     static SCALE_IMAGE_W600_H650_Q100 = "c_limit,w_600,h_650,q_100";
+    static SCALE_IMAGE_W288_H216_Q100 = "c_limit,w_288,h_216,q_100";
+    static SCALE_IMAGE_W200_H250_Q100 = "c_limit,w_200,h_250,q_100";
 
 
 
@@ -105,7 +107,7 @@ class App{
     static IziToast = class {
         static showSuccessAlertLeft(m) {
             iziToast.success({
-                title: 'OK',
+                title: '',
                 position: 'topLeft',
                 timeout: 2500,
                 message: m
@@ -114,7 +116,7 @@ class App{
 
         static showSuccessAlertRight(m) {
             iziToast.success({
-                title: 'OK',
+                title: '',
                 position: 'topRight',
                 timeout: 2500,
                 message: m
@@ -179,11 +181,12 @@ class LocationRegion {
 
 }
 class Customer {
-    constructor(id, fullName, email, phone, locationRegion) {
+    constructor(id, fullName, email, phone, deleted, locationRegion) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.deleted = deleted;
         this.locationRegion = locationRegion;
     }
 }
@@ -198,5 +201,28 @@ class CustomerAvatar{
         this.cloudId = cloudId;
         this.ts = ts;
         this.customer = customer;
+    }
+}
+
+class ProductAvatar {
+    constructor(id, fileName, fileFolder, fileUrl, fileType, cloudId, ts) {
+        this.id = id;
+        this.fileName = fileName;
+        this.fileFolder = fileFolder;
+        this.fileUrl = fileUrl;
+        this.fileType = fileType;
+        this.cloudId = cloudId;
+        this.ts = ts;
+    }
+}
+
+class Product {
+    constructor(id, productName, price, quantity, description, productAvatar) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.productAvatar = productAvatar;
     }
 }

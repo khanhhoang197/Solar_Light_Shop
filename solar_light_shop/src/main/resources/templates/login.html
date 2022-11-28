@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/assets/iziToast/dist/css/iziToast.css">
     <link rel="stylesheet" type="text/css" href="/assets/iziToast/iziToast.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/sweetalert2/sweetalert2.min.css">
@@ -419,10 +419,13 @@
 
     let page = {
         urls: {
-            registers: App.REGISTER,
-            login: App.LOGIN
+            registers: App.REGISTER_USER,
+            login: App.LOGIN_USER
         },
-        dialogs: {},
+        dialogs: {
+            elements: {},
+            commands: {},
+        },
         elements: {},
         commands: {},
         initializeEventControl: {}
@@ -460,10 +463,19 @@
             url: page.urls.login,
             data: JSON.stringify(user)
         }).done((data) => {
-            App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 2000);
-            setTimeout(function () {
-                    window.location.href = "/";
-                }, 2000);
+            // console.log(data.roles[0]);
+            let role = data.roles[0].authority;
+            if (role === "ADMIN"  || role === "ADMINISTRATORS") {
+                window.location.href = "/admins";
+                App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 2000);
+            }else {
+                App.IziToast.showSuccessAlertRight("Đăng nhập thành công.", "<b></b>", 2000);
+                if (role ==="USER" || role === "CUSTOMER"){
+                    setTimeout(function () {
+                        window.location.href = "/home";
+                    }, 1000);
+                }
+            }
         })
             .fail((jqXHR) => {
                 App.SweetAlert.showErrorAlert("Tài khoản hoặc mật khẩu không đúng! Vui lòng kiểm tra lại!");

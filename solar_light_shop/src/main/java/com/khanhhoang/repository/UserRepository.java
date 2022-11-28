@@ -4,6 +4,7 @@ import com.khanhhoang.model.User;
 import com.khanhhoang.model.dto.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -15,7 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
 
-
     @Query("SELECT NEW com.khanhhoang.model.dto.UserDTO (" +
             "u.id, " +
             "u.username" +
@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "FROM User u " +
             "WHERE u.username = ?1"
     )
-    Optional<UserDTO> findUserDTOByUsername(String username);
+    Optional<UserDTO> findUserDTOByUsername(@Param("username") String username, @Param("id") Long id);
 
 
     Boolean existsByUsername(String username);

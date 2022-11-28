@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Trang chủ</title>
+        <th:block th:replace="/admin/layout/head :: head"/>
+    <th:block th:replace="/admin/layout/head :: headCustomer"/>
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/page-home/css/style.css">
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/home/layout/top-index :: top-index"/>
+    <div class="content">
+
+        <!-- Start container-fluid -->
+        <div class="container-fluid">
+
+            <div class="row" style="background-color: rgba(180,177,177,0.71)">
+                <div class="col-12 text-center text-justify">
+                    <marquee direction="left" >
+                        <h4 style="margin-top: 12px">Xin chào <span th:text="${user.getRole().getPosition()}" style="font-weight: bold"></span>
+                            <span th:text="${user.fullName}" class="test"></span>!
+                        </h4>
+                    </marquee>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div id="content9" class="contentPrd">
+                        <div class="card fl mgr-10" >
+                            <img src="https://ngocphatsolar.com.vn/wp-content/uploads/2021/08/dai-ly-ban-den-nang-luong-mat-troi-jindian-tai-dak-lak.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+            </div>
+            <div id="content1" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS632LJcWKUDlcfgVK0mT31v6Xs7p5cK5rY6w&usqp=CAU" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content2" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://bizweb.dktcdn.net/100/171/173/products/81932c182de4ee725a62bec74bd19add.jpg?v=1600929814700" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content3" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://benco.vn/wp-content/uploads/2020/04/den-nang-luong-mat-troi.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content4" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://maymocvietnam.com/wp-content/uploads/2021/06/den_duong_nang_luong_mat_troi_UFO_150.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content5" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://www.dhcsolar.com/wp-content/uploads/2022/02/Den-nang-luong-mat-troi-ufo-1000w.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content6" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://vinhcatgroup.com/images/pro/den-nang-luong-mat-troi-tru-cong-vc01_1043.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content7" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://vidaisun.com/wp-content/uploads/2020/12/tru-cong-4-420x420.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content8" class="contentPrd">
+                <div class="card fl mgr-10" >
+                    <img src="https://dmtsolar.com/uploads/102tech/images/tin-tuc/den-nang-luong-mat-troi-san-vuon-da-dang-mau-ma-chat-luong-tai-DMT-Solar-1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- end row -->
+
+
+            <!-- end row -->
+
+        </div>
+        <!-- end container-fluid -->
+
+
+        <!-- Footer Start -->
+        <th:block th:replace="/admin/layout/footer :: footer"/>
+        <!-- end Footer -->
+    </div>
+    <!-- end content -->
+
+</div>
+<!-- END content-page -->
+
+<!-- END wrapper -->
+
+<!-- Vendor js -->
+<th:block th:replace="/admin/layout/script :: script"/>
+<th:block th:replace="/admin/layout/script :: scriptCustomer"/>
+</body>
+
+<script>
+    const page = {
+        urls: {
+            getAllProducts: App.PRODUCT_API,
+            getCustomerById: App.CUSTOMER_API,
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+            alertDanger: {}
+        },
+        initializeEventControl: {}
+    }
+
+    page.elements.btnShowCreateModal = $("#btnShowCreateModal");
+    page.elements.content = $("#content");
+    page.elements.tbCustomerBody = $("#tbCustomer tbody");
+
+    let productAvatar = new ProductAvatar();
+    let product = new Product();
+
+    let carts = [];
+
+
+    page.commands.getAllProducts = () => {
+        $.ajax({
+            type: "GET",
+            url: page.urls.getAllProducts
+        })
+            .done((data) => {
+
+                $.each(data, (i, item) => {
+                    product = item;
+                    productAvatar = product.avatar;
+
+                    let str = renderProduct(product, productAvatar);
+
+                    page.elements.content.append(str);
+                })
+
+                page.commands.handleAddCart();
+
+            })
+            .fail((error) => {
+                console.error(error);
+            })
+    }
+
+
+    page.commands.getCustomerById = (customerId) => {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getCustomerById + "/" + customerId
+        })
+            .done((data) => {
+                customer = data;
+            })
+            .fail((error) => {
+                console.error(error);
+            })
+    }
+
+
+    function renderProduct(product, avatar) {
+        let productAvatar = `${App.BASE_URL_CLOUD_IMAGE}/${App.SCALE_IMAGE_W288_H216_Q100}/${avatar.fileFolder}/${avatar.fileName}`;
+
+        return `
+            <div class="card fl mgr-10" style="width: 23rem; max-height: 415px;">
+                <img src="${productAvatar}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${product.productName}</h5>
+                    <p class="card-text">${product.price}</p>
+                    <button class="btn btn-outline-primary add-cart" data-id="${product.id}" data-title="${product.productName}" data-price="${product.price}" data-unit="${product.unit}" data-avatar="${productAvatar}">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            `;
+    }
+
+
+    function renderCart(item) {
+        return `
+            <div class="mini-cart__item ">
+                <div class="mini-cart__left">
+                    <a class="mnc-link" title="" href="/">
+                        <img src="${item.avatar}" alt="${item.productName}">
+                    </a>
+                </div>
+                <div class="mini-cart__right">
+                    <p class="mini-cart__title">
+                        <a class="mnc-productName mnc-link" href="/san-pham/cam-sanh">${item.productName}</a>
+                        <span class="mnc-variant">${item.quantity}</span>
+                    </p>
+                    <div class="mini-cart__quantity">
+                        <div class="quantity-selector">
+                            <button class="qty-btn mnc-minus">
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <rect height="1" width="18" y="9" x="1"></rect>
+                                </svg>
+                            </button>
+                            <input class="qty-value mnc-value" type="text" readonly="" name="mnc-quantity" value="1">
+                            <button class="qty-btn mnc-plus">
+                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="9" y="1" width="1" height="17"></rect>
+                                    <rect x="1" y="9" width="17" height="1"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mini-cart__price">
+                            <span class="mnc-price">${item.price}&nbsp;₫</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart__remove"> ×</div>
+                </div>
+            </div>
+        `;
+
+
+
+
+
+    }
+
+
+    page.commands.loadData = () => {
+        page.commands.getAllProducts();
+    }
+
+    page.commands.handleAddCart = () => {
+        $(".add-cart").on("click", function () {
+            let productId = $(this).data("id");
+            let productName = $(this).data("productName");
+            let price = $(this).data("price");
+            let quantity = $(this).data("quantity");
+            let productAvatar = $(this).data("productAvatar");
+            // let quantity = 1;
+
+            let cartItem = {
+                id: productId,
+                productName: productName,
+                price: price,
+                quantity: quantity,
+                productAvatar: productAvatar,
+                // quantity
+            }
+
+            carts.push(cartItem);
+
+            $("#show-cart .table-clone-cart").empty();
+
+            $.each(carts, (i, item) => {
+                console.log(item)
+                let str = renderCart(item);
+                $("#show-cart .table-clone-cart").append(str);
+            })
+        })
+    }
+
+    page.initializeEventControl = () => {
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+
+        page.initializeEventControl();
+    });
+
+</script>
+
+
+</html>

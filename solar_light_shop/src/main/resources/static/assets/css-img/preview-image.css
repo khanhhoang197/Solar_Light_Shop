@@ -2,9 +2,9 @@
 
 .wrapper1{
     position: relative;
-    height: 250px;
+    height: 350px;
     width: 90%;
-    border-radius: 10px;
+    border-radius: 100% / 100% 100% 100% 100%;
     background: #fff;
     border: 2px dashed #c2cdda;
     display: flex;
@@ -42,7 +42,7 @@
 }
 
 .wrapper1 .text{
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     color: #5B5B7B;
 }

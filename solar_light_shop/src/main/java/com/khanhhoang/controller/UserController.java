@@ -20,8 +20,6 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/admin/user/list");
 
-//        List<CustomerDTO> customers = customerService.getAllCustomerDTO();
-
         modelAndView.addObject("user", appUtils.getPrincipalUser());
 
         return modelAndView;

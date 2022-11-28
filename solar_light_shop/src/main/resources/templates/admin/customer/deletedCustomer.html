@@ -3,8 +3,9 @@
 
 <head>
     <title>Khách hàng bị xóa</title>
-    <th:block th:replace="/admin/layout/head :: headCustomer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <th:block th:replace="/admin/layout/head :: headCustomer"/>
+
          <!--  <th:block th:replace="/admin/layout/head :: head"/>-->
 
 </head>
@@ -31,22 +32,13 @@
             <!-- Start container-fluid -->
             <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="text-center">
-                            <h4 class="header-title mb-3">Xin chào <span th:text="${user.fullName}" class="test"></span>!
-                                Chúc <span th:text="${user.fullName}" class="test"></span> một ngày làm việc hiệu quả !
-                            </h4>
-                        </div>
-                    </div>
-                </div>
                 <!-- end row -->
                 <div class="row">
                     <div class="col-12">
                         <div>
                             <h3 class="font-24">Danh sách khách hàng đã xóa </h3>
 
-                            <table id="datatable" class="table table-bordered dt-responsive nowrap tbCustomer"
+                            <table id="tbCustomer" class="table table-bordered dt-responsive nowrap tbCustomer"
                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
@@ -107,7 +99,7 @@
     let page = {
         urls: {
             getAllCustomers: App.CUSTOMER_API,
-            getAllDeletedCustomer: App.CUSTOMER_API + "?deleted=0&id_ne=",
+            getAllDeletedCustomer: App.CUSTOMER_API+"/deleted-customer",
             getCustomerById: App.CUSTOMER_API,
             createCustomer: App.CUSTOMER_API,
             updateCustomer: App.CUSTOMER_API,
@@ -131,8 +123,8 @@
     }
 
     page.elements.btnShowCreateModal = $("#btnShowCreateModal");
-    page.elements.tbCustomer = $(".tbCustomer");
-    page.elements.tbCustomerBody = $(".tbCustomer tbody");
+    page.elements.tbCustomer = $("#tbCustomer");
+    page.elements.tbCustomerBody = $("#tbCustomer tbody");
 
     let customer = new Customer();
     let locationRegion = new LocationRegion();
@@ -156,7 +148,7 @@
             url: page.urls.getAllDeletedCustomer,
         })
             .done((data) => {
-                $.each(data, (i, item) => {
+                $.each(data.deleted=true, (i, item) => {
                     customerAvatar = item;
                     customer = customerAvatar.customer;
                     locationRegion = customer.locationRegion;
@@ -191,17 +183,14 @@
                     <td>${locationRegion.address}</td>
                     <td></td>
                     <td class="text-center">
-                        <button data-id="${customer.id}"
-                                data-avatar-id = "${obj.id}"
-                                data-avatar-file-folder = "${obj.fileFolder}"
-                                data-avatar-file-name = "${obj.fileName}"
-                                class="btn btn btn-outline-info restore"
+                     <button data-id="${customer.id}"
+                                class="btn btn-outline-warning restore"
                                 title="Khôi phục"
                                 data-toggle="tooltip"
                                 data-bs-original-title="Edit"
-                                data-bs-placement="top"
-                                data-bs-toggle="modal"
-                             <i class="fa-regular fa-reply"></i>
+                                data-bs-placement="top">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        </button>
           </button>
                     </td>
 
@@ -238,11 +227,12 @@
                 "content-type": "application/json"
             },
             type: "PATCH",
-            url: page.urls.deleteCustomer + "/" + customerId,
+            url: page.urls.updateCustomer + "/restore/" + customerId,
             data: JSON.stringify(customer)
         })
             .done(() => {
-                $("#tr_" + customerId).remove();
+                // $("#tr_" + customerId).remove();
+                customer.deleted = 0;
                 App.IziToast.showSuccessAlertLeft("Xóa khách hàng <b>'" + customer.fullName + "'</b> thành công");
             })
             .fail((jqXHR) => {

@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     private IUserService userService;
 
@@ -62,15 +61,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
 
         http.authorizeRequests()
-                .antMatchers("/",
+                .antMatchers(
                         "/api/auth/login",
                         "/api/auth/register",
+                        "/api/products",
                         "/login",
                         "/logout",
                         "/register",
-                        "/api/roles"
+                        "/api/roles",
+                        "/home"
                 ).permitAll()
-                .antMatchers("/resources/**", "/assets/**").permitAll()
+                .antMatchers(
+                        "/resources/**",
+                        "/assets/**")
+                .permitAll()
+                .antMatchers(
+                        "/resources/**",
+                        "/template/**")
+                .permitAll()
+                .antMatchers("/home").hasAnyAuthority("ADMIN","USER","CUSTOMER")
+
+                .antMatchers("/admins","/products","/customers","/admins/products/create","/admins/customers/create","/admins/customers/update",
+                        "/admins/products/create","/admins/products/update","/admins/products/delete",
+                        "/admins/customers/create","/admins/products/update").hasAnyAuthority("ADMIN","ADMINISTRATORS")
+                .antMatchers("/admins/deleted-customer","/admins/users/deleted","/admins/customers/delete","/admins/**","/home/**","/error/**").hasAnyAuthority("ADMINISTRATORS")
+
                 .antMatchers(
                         "/v3/api-docs",
                         "/swagger-resources/configuration/ui",
@@ -79,10 +94,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/configuration/security",
                         "/configuration/security",
                         "/swagger-ui/**"
-                ).permitAll()
-//                .antMatchers("/**").hasAnyAuthority("MORDERATER")
-                .antMatchers(
-                     "/admin/**","/product/list"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -100,8 +111,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
         ;
 
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedPage("/error/403");

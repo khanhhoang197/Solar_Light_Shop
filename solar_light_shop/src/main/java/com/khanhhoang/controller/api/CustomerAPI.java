@@ -7,6 +7,7 @@ import com.khanhhoang.model.CustomerAvatar;
 import com.khanhhoang.model.LocationRegion;
 import com.khanhhoang.model.dto.CustomerAvatarCreateDTO;
 import com.khanhhoang.model.dto.CustomerAvatarDTO;
+import com.khanhhoang.model.dto.CustomerDTO;
 import com.khanhhoang.model.dto.CustomerUpdateDTO;
 import com.khanhhoang.service.customer.ICustomerService;
 import com.khanhhoang.service.customerAvatar.ICustomerAvatarService;
@@ -42,6 +43,14 @@ public class CustomerAPI {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(customerAvatarDTOS, HttpStatus.OK);
+    }
+    @GetMapping("/deleted-customer")
+    public ResponseEntity<?> getAllByDeletedIsTrue() {
+        List<CustomerAvatarDTO> customerByDeletedIsTrues = customerService.getAllCustomerByDeletedIsTrue();
+        if (customerByDeletedIsTrues.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(customerByDeletedIsTrues, HttpStatus.OK);
     }
 
     @GetMapping("/{customerId}")
@@ -128,6 +137,23 @@ public class CustomerAPI {
 
         try {
             customerService.softDelete(customerId);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            throw new DataInputException("Vui lòng liên hệ Administrator.");
+        }
+    }
+    @PatchMapping("/deleted-customer/restore/{customerId}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATORS')")
+    public ResponseEntity<?> restore(@PathVariable Long customerId) {
+
+        Optional<Customer> customerOptional = customerService.findById(customerId);
+
+        if (!customerOptional.isPresent()) {
+            throw new DataInputException("ID khách hàng không hợp lệ.");
+        }
+
+        try {
+            customerService.restore(customerId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             throw new DataInputException("Vui lòng liên hệ Administrator.");

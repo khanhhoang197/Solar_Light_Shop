@@ -19,8 +19,6 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/temp");
 
-//        List<CustomerDTO> customers = customerService.getAllCustomerDTO();
-
         modelAndView.addObject("user", appUtils.getPrincipalUser());
 
         return modelAndView;

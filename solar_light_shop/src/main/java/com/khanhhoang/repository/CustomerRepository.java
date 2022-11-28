@@ -1,6 +1,7 @@
 package com.khanhhoang.repository;
 
 import com.khanhhoang.model.Customer;
+import com.khanhhoang.model.dto.CustomerAvatarDTO;
 import com.khanhhoang.model.dto.CustomerDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,9 +38,24 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     )
     Optional<CustomerDTO> getByEmailDTO(@Param("email") String email);
 
+    @Query("SELECT NEW com.khanhhoang.model.dto.CustomerDTO (" +
+            "c.id, " +
+            "c.fullName, " +
+            "c.email, " +
+            "c.phone, " +
+            "c.locationRegion" +
+            ") FROM Customer AS c " +
+            "WHERE c.deleted = true "
+    )
+    List<CustomerAvatarDTO> getAllCustomerByDeletedIsTrue();
+
     @Modifying
     @Query("UPDATE Customer AS c SET c.deleted = true WHERE c.id = :customerId")
     void softDelete(@Param("customerId") long customerId);
+
+    @Modifying
+    @Query("UPDATE Customer AS c SET c.deleted = false WHERE c.id = :customerId")
+    void restore(@Param("customerId") long customerId);
 
     List<Customer> findAllByIdNot(long id);
 

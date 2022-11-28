@@ -48,6 +48,12 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
+    public List<CustomerAvatarDTO> getAllCustomerByDeletedIsTrue(){
+        return customerRepository.getAllCustomerByDeletedIsTrue();
+    }
+
+
+    @Override
     public List<CustomerAvatarDTO> getAllCustomerAvatarDTO() {
         return customerAvatarService.getAllCustomerAvatarDTO();
     }
@@ -81,6 +87,11 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public void softDelete(long customerId) {
         customerRepository.softDelete(customerId);
+    }
+
+    @Override
+    public void restore(long customerId) {
+        customerRepository.restore(customerId);
     }
 
     @Override
