@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public List<CustomerAvatarDTO> getAllCustomerByDeletedIsTrue(){
+    public List<CustomerDTO> getAllCustomerByDeletedIsTrue(){
         return customerRepository.getAllCustomerByDeletedIsTrue();
     }
 
@@ -56,6 +56,11 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<CustomerAvatarDTO> getAllCustomerAvatarDTO() {
         return customerAvatarService.getAllCustomerAvatarDTO();
+    }
+
+    @Override
+    public List<CustomerAvatarDTO> getAllDeletedCustomerAvatarDTO() {
+        return customerAvatarService.getAllDeletedCustomerAvatarDTO();
     }
 
     @Override

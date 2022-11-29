@@ -28,6 +28,7 @@ public class Customer extends BaseEntity{
     private String email;
 
     private String phone;
+    private boolean deleted;
 
     @OneToOne
     private LocationRegion locationRegion;
@@ -40,6 +41,7 @@ public class Customer extends BaseEntity{
                 .setFullName(fullName)
                 .setEmail(email)
                 .setPhone(phone)
+                .setDeleted(deleted)
                 .setLocationRegion(locationRegion.toLocationRegionDTO());
 
     }

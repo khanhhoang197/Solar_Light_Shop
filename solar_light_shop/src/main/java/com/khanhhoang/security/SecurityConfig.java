@@ -70,21 +70,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/api/roles",
                         "/home"
+
                 ).permitAll()
                 .antMatchers(
                         "/resources/**",
                         "/assets/**")
                 .permitAll()
-                .antMatchers(
-                        "/resources/**",
-                        "/template/**")
-                .permitAll()
-                .antMatchers("/home").hasAnyAuthority("ADMIN","USER","CUSTOMER")
+//                .antMatchers(
+//                        "/resources/**",
+//                        "/template/**")
+//                .permitAll()
+//                .antMatchers("/home","/home/**").hasAnyAuthority("ADMIN","USER","CUSTOMER")
 
                 .antMatchers("/admins","/products","/customers","/admins/products/create","/admins/customers/create","/admins/customers/update",
                         "/admins/products/create","/admins/products/update","/admins/products/delete",
                         "/admins/customers/create","/admins/products/update").hasAnyAuthority("ADMIN","ADMINISTRATORS")
-                .antMatchers("/admins/deleted-customer","/admins/users/deleted","/admins/customers/delete","/admins/**","/home/**","/error/**").hasAnyAuthority("ADMINISTRATORS")
+                .antMatchers("/api/customers/deleted-customer","/admins/users/deleted","/admins/customers/delete","/admins/**","/home/**","/error/**").hasAnyAuthority("ADMINISTRATORS")
 
                 .antMatchers(
                         "/v3/api-docs",

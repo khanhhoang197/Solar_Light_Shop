@@ -167,13 +167,13 @@
 
           // Loading//
           page.commands.showLoading = () => {
-            page.elements.loader.css('z-index', 1);
+            page.elements.loader.css('z-display', 'block');
             page.dialogs.elements.btnUpdate.prop('disabled', true);
 
           }
 
           page.commands.closeLoading = () => {
-            page.elements.loader.css('z-index', -1);
+            page.elements.loader.css('display', 'none');
             page.dialogs.elements.btnUpdate.prop('disabled', false);
           }
           //End Loading//

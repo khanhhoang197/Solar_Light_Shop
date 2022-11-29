@@ -2,6 +2,7 @@ package com.khanhhoang.controller;
 
 import com.khanhhoang.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,8 @@ public class CustomersController {
 
         return modelAndView;
     }
-
     @GetMapping("/deleted-customer")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATORS')")
     public ModelAndView showListDeleteCustomerPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/admin/customer/deletedCustomer");

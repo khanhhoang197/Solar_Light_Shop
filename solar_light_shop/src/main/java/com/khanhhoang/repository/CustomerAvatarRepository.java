@@ -27,6 +27,24 @@ public interface CustomerAvatarRepository extends JpaRepository<CustomerAvatar, 
     )
     List<CustomerAvatarDTO> getAllCustomerAvatarDTO();
 
+
+    @Query("SELECT NEW com.khanhhoang.model.dto.CustomerAvatarDTO (" +
+            "ca.id, " +
+            "ca.fileName, " +
+            "ca.fileFolder, " +
+            "ca.fileUrl, " +
+            "ca.fileType, " +
+            "ca.cloudId, " +
+            "ca.ts, " +
+            "ca.customer" +
+            ") FROM CustomerAvatar AS ca " +
+            "JOIN Customer AS c " +
+            "ON ca.customer.id = c.id " +
+            " WHERE c.deleted = true "
+    )
+    List<CustomerAvatarDTO> getAllDeletedCustomerAvatarDTO();
+
+
     @Query("SELECT NEW com.khanhhoang.model.dto.CustomerAvatarDTO (" +
             "ca.id, " +
             "ca.fileName, " +

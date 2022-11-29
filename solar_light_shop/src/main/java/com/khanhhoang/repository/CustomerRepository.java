@@ -34,7 +34,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             ") FROM Customer AS c " +
             "WHERE c.deleted = false " +
             "AND c.email = :email"
-//         +   "AND c = 4"
     )
     Optional<CustomerDTO> getByEmailDTO(@Param("email") String email);
 
@@ -42,12 +41,14 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             "c.id, " +
             "c.fullName, " +
             "c.email, " +
-            "c.phone, " +
+            "c.phone," +
+            "c.deleted, " +
             "c.locationRegion" +
             ") FROM Customer AS c " +
             "WHERE c.deleted = true "
     )
-    List<CustomerAvatarDTO> getAllCustomerByDeletedIsTrue();
+    List<CustomerDTO> getAllCustomerByDeletedIsTrue();
+
 
     @Modifying
     @Query("UPDATE Customer AS c SET c.deleted = true WHERE c.id = :customerId")

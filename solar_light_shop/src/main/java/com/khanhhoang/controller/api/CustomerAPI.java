@@ -46,11 +46,12 @@ public class CustomerAPI {
     }
     @GetMapping("/deleted-customer")
     public ResponseEntity<?> getAllByDeletedIsTrue() {
-        List<CustomerAvatarDTO> customerByDeletedIsTrues = customerService.getAllCustomerByDeletedIsTrue();
-        if (customerByDeletedIsTrues.size() == 0) {
+//        List<CustomerDTO> customerByDeletedIsTrues = customerService.getAllCustomerByDeletedIsTrue();
+        List<CustomerAvatarDTO> customerDeleted = customerService.getAllDeletedCustomerAvatarDTO();
+        if (customerDeleted.size() == 0) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(customerByDeletedIsTrues, HttpStatus.OK);
+        return new ResponseEntity<>(customerDeleted, HttpStatus.OK);
     }
 
     @GetMapping("/{customerId}")

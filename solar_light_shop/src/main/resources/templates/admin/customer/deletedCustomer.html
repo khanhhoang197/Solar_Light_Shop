@@ -103,7 +103,7 @@
             getCustomerById: App.CUSTOMER_API,
             createCustomer: App.CUSTOMER_API,
             updateCustomer: App.CUSTOMER_API,
-            deleteCustomer: App.CUSTOMER_API + "/delete",
+            restoreCustomer: App.CUSTOMER_API + "/deleted-customer/restore",
             getAllProvinces: App.PROVINCE_URL,
             getAllDistrictsByProvinceId: App.PROVINCE_URL + "district/",
             getAllWardsByDistrictId: App.PROVINCE_URL + "ward/",
@@ -148,7 +148,7 @@
             url: page.urls.getAllDeletedCustomer,
         })
             .done((data) => {
-                $.each(data.deleted=true, (i, item) => {
+                $.each(data, (i, item) => {
                     customerAvatar = item;
                     customer = customerAvatar.customer;
                     locationRegion = customer.locationRegion;
@@ -169,40 +169,39 @@
     page.commands.renderCustomer = (obj, customer, locationRegion) => {
         let image_thumbnail = App.BASE_URL_CLOUD_IMAGE + "/" + App.SCALE_IMAGE_W100_H80_Q100 + "/" + obj.fileFolder + "/" + obj.fileName;
         return `
-                <tr id="tr_${customer.id}">
-                    <td>${customer.id}</td>
-                    <td>
-                        <img src=${image_thumbnail} alt="${obj.id}">
-                    </td>
-                    <td>${customer.fullName}</td>
-                    <td>${customer.email}</td>
-                    <td>${customer.phone}</td>
-                    <td>${locationRegion.provinceName}</td>
-                    <td>${locationRegion.districtName}</td>
-                    <td>${locationRegion.wardName}</td>
-                    <td>${locationRegion.address}</td>
-                    <td></td>
-                    <td class="text-center">
-                     <button data-id="${customer.id}"
-                                class="btn btn-outline-warning restore"
-                                title="Khôi phục"
-                                data-toggle="tooltip"
-                                data-bs-original-title="Edit"
-                                data-bs-placement="top">
-                        <i class="fa-solid fa-rotate-left"></i>
-                        </button>
-          </button>
-                    </td>
-
-                </tr>
-            `;
+                        <tr id="tr_${customer.id}">
+                            <td>${customer.id}</td>
+                            <td>
+                                <img src=${image_thumbnail} alt="${obj.id}">
+                            </td>
+                            <td>${customer.fullName}</td>
+                            <td>${customer.email}</td>
+                            <td>${customer.phone}</td>
+                            <td>${locationRegion.provinceName}</td>
+                            <td>${locationRegion.districtName}</td>
+                            <td>${locationRegion.wardName}</td>
+                            <td>${locationRegion.address}</td>
+                            <td></td>
+                            <td class="text-center">
+                                <button data-id="${customer.id}"
+                                     class="btn btn-outline-warning restore"
+                                     title="Khôi phục"
+                                     data-toggle="tooltip"
+                                     data-bs-original-title="Edit"
+                                     data-bs-placement="top">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
     }
+
 
     //--- DELETE CUSTOMER ---//
     page.commands.handleShowConfirmRestore = () => {
         $(".restore").on("click", function () {
             let id = $(this).data("id");
-            page.commands.getCustomerById(id).then(() => {
+            page.commands.getCustomerById(id).then((data) => {
                 Swal.fire({
                     title: 'Khôi phục',
                     text: "Bạn có muốn khôi phục khách hàng:' " + customer.fullName + " ' không?",
@@ -213,7 +212,7 @@
                     confirmButtonText: 'Khôi phục'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        page.commands.doDeleteCustomer(id)
+                        page.commands.doRestoreCustomer(id)
                     }
                 })
             })
@@ -227,12 +226,12 @@
                 "content-type": "application/json"
             },
             type: "PATCH",
-            url: page.urls.updateCustomer + "/restore/" + customerId,
+            url: page.urls.restoreCustomer + "/" + customerId,
             data: JSON.stringify(customer)
         })
-            .done(() => {
-                // $("#tr_" + customerId).remove();
-                customer.deleted = 0;
+            .done((data) => {
+                $("#tr_" + customerId).remove();
+
                 App.IziToast.showSuccessAlertLeft("Xóa khách hàng <b>'" + customer.fullName + "'</b> thành công");
             })
             .fail((jqXHR) => {

@@ -10,5 +10,7 @@ public interface ICustomerAvatarService extends IGeneralService<CustomerAvatar> 
     void delete(String id);
 
     List<CustomerAvatarDTO> getAllCustomerAvatarDTO();
+    List<CustomerAvatarDTO> getAllDeletedCustomerAvatarDTO();
+
     CustomerAvatarDTO getCustomerAvatarById(long customerId);
 }

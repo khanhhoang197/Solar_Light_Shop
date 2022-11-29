@@ -28,15 +28,25 @@ public class CustomerDTO {
     @NotEmpty(message = "Vui lòng nhập số điện thoại")
     private String phone;
 
+    private boolean deleted;
 
     @Valid
     private LocationRegionDTO locationRegion;
 
+    public CustomerDTO(Long id, String fullName, String email, String phone, boolean deleted, LocationRegion locationRegion) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.deleted = deleted;
+        this.locationRegion = locationRegion.toLocationRegionDTO();
+    }
     public CustomerDTO(Long id, String fullName, String email, String phone, LocationRegion locationRegion) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+
         this.locationRegion = locationRegion.toLocationRegionDTO();
     }
 
@@ -46,6 +56,7 @@ public class CustomerDTO {
                 .setFullName(fullName)
                 .setEmail(email)
                 .setPhone(phone)
+                .setDeleted(deleted)
                 .setLocationRegion(locationRegion.toLocationRegion());
     }
 }

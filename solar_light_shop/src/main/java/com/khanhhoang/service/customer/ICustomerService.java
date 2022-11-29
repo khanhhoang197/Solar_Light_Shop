@@ -16,12 +16,12 @@ import java.util.Optional;
 public interface ICustomerService extends IGeneralService<Customer> {
     List<CustomerDTO> getAllCustomerDTO();
 
-    List<CustomerAvatarDTO> getAllCustomerByDeletedIsTrue();
+    List<CustomerDTO> getAllCustomerByDeletedIsTrue();
 
 //    Customer save(Customer customer, LocationRegion locationRegion);
 
     List<CustomerAvatarDTO> getAllCustomerAvatarDTO();
-
+    List<CustomerAvatarDTO> getAllDeletedCustomerAvatarDTO();
 
     void softDelete(long customerId);
 
