@@ -112,7 +112,8 @@
                    aria-haspopup="false" aria-expanded="false">
                     <img src="/assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
-                                    <span th:text="${user.fullName}"></span>  <i class="mdi mdi-chevron-down"></i>
+                                    <span th:text="${user.fullName}"></span>
+                        <span th:field="${user.fullName}"></span><i class="mdi mdi-chevron-down"></i>
                             </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

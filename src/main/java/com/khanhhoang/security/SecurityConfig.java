@@ -76,16 +76,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/resources/**",
                         "/assets/**")
                 .permitAll()
-//                .antMatchers(
-//                        "/resources/**",
-//                        "/template/**")
-//                .permitAll()
+                .antMatchers(
+                        "/resources/**",
+                        "/templates/home/**")
+                .permitAll()
 //                .antMatchers("/home","/home/**").hasAnyAuthority("ADMIN","USER","CUSTOMER")
 
-                .antMatchers("/admins","/products","/customers","/admins/products/create","/admins/customers/create","/admins/customers/update",
+                .antMatchers("/admins","/products","/customers",
+                        "/admins/products/create","/admins/customers/create","/admins/customers/update",
                         "/admins/products/create","/admins/products/update","/admins/products/delete",
-                        "/admins/customers/create","/admins/products/update").hasAnyAuthority("ADMIN","ADMINISTRATORS")
-                .antMatchers("/api/customers/deleted-customer","/admins/users/deleted","/admins/customers/delete","/admins/**","/home/**","/error/**").hasAnyAuthority("ADMINISTRATORS")
+                        "/admins/customers/create","/admins/products/update")
+                .hasAnyAuthority("ADMIN","ADMINISTRATORS")
+                .antMatchers("/api/customers/deleted-customer",
+                        "/admins/users/deleted","/admins/customers/delete","/admins/**",
+                        "/home/**","/error/**").hasAnyAuthority("ADMINISTRATORS")
 
                 .antMatchers(
                         "/v3/api-docs",

@@ -514,7 +514,10 @@
             App.IziToast.showSuccessAlertRight("Đăng ký tài khoản thành công", "<b></b>", 2000, "/");
             page.elements.login.click();
         }).fail((jqXHR) => {
-
+            if (page.elements.fullName.val() == null){
+                App.SweetAlert.showErrorAlert("tên không được để trống", 2000)
+            }
+            App.SweetAlert.showErrorAlert("Nhập không hợp lệ",2000)
         });
     }
     //  END REGISTER  //
